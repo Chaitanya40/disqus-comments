@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_29_154821) do
+ActiveRecord::Schema.define(version: 2019_12_29_163312) do
 
   create_table "comments", force: :cascade do |t|
     t.text "comment_text"
@@ -39,13 +39,7 @@ ActiveRecord::Schema.define(version: 2019_12_29_154821) do
     t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.text "encrypted_password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+# Could not dump table "users" because of following StandardError
+#   Unknown type 'password' for column 'text'
 
 end
