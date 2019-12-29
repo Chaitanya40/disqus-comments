@@ -26,6 +26,8 @@ gem 'jwt'
 
 gem 'simple_command'
 
+gem 'kaminari'
+
 # Test framework	
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
