@@ -1,5 +1,5 @@
 class AddPasswordColumn < ActiveRecord::Migration[5.2]
   def change
-  	add_column :users, :password, :text
+  	add_column :users, :password_digest, :text
   end
 end
