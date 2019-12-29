@@ -26,6 +26,11 @@ gem 'jwt'
 
 gem 'simple_command'
 
+# Test framework	
+group :development, :test do
+  gem 'rspec-rails', '~> 3.5'
+end
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
