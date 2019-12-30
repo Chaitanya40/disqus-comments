@@ -10,7 +10,7 @@ class RepliesController < ApplicationController
 		if reply.update_attributes(reply_params)
 			render json: reply, status: :ok
 		else 
-			render json: { reply.errors.full_messages.to_sentence }, status: :bad_request
+			render json: { error: reply.errors.full_messages.to_sentence }, status: :bad_request
 		end		
 	end 
 
@@ -19,16 +19,16 @@ class RepliesController < ApplicationController
 		if reply.destroy
 			render json: reply, status: :ok
 		else 
-			render json: { reply.errors.full_messages.to_sentence }, status: :bad_request
+			render json: { error: reply.errors.full_messages.to_sentence }, status: :bad_request
 		end		
 	end 
 
 	def create
-		reply = @comment.replies.create(user_id: current_user.id)
+		reply = @comment.replies.create(reply_params.merge user_id: current_user.id)
 		if reply.persisted?
-			render json: reply, status: :ok
+			render json: reply, status: :created
 		else 
-			render json: { reply.errors.full_messages.to_sentence }, status: :created
+			render json: { error: reply.errors.full_messages.to_sentence }, status: :bad_request
 		end		
 	end
 
@@ -39,6 +39,10 @@ class RepliesController < ApplicationController
 	private
 
 	def set_comment
-		@comment = Comment.find(params[:id])
+		@comment = Comment.find(params[:comment_id])
+	end	
+
+	def reply_params
+		params.require(:reply).permit(:id, :reply_text)
 	end	
 end

@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_12_29_163723) do
   create_table "replies", force: :cascade do |t|
     t.integer "comment_id"
     t.integer "user_id"
+    t.text "reply_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["comment_id"], name: "index_replies_on_comment_id"
