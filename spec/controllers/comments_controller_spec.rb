@@ -13,6 +13,21 @@ RSpec.describe CommentsController, type: :controller do
 			set_request_headers(@auth_token)
 			get :index, params: { question_id: @question.id }
 			expect(JSON.parse(response.body)).to eq([])
+		end
+
+		it 'fetches array of comments when there are comments available' do
+			@question.comments.create(user_id: @user1.id, comment_text: 'The answer is 42') 
+			set_request_headers(@auth_token)
+			get :index, params: { question_id: @question.id }
+			expect(JSON.parse(response.body).length).to eq(1) 
+		end 	
+	end
+
+	describe 'POST creates comment for the given question' do
+		it 'creates comment' do
+			set_request_headers(@auth_token)
+			get :create, params: { question_id: @question.id, comment: { comment_text: 'The answer is 42' } }
+			expect(response.status).to eq(201)
 		end	
 	end	
 end
